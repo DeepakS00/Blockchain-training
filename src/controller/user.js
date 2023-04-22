@@ -9,7 +9,7 @@ const addUser = async (req, res) => {
     if (!username) throw new Error('username not found');
     const userExists = userBloomFilter.contains(username);
     if (userExists) throw new Error(`${username} may exist`);
-    await services.create(username);
+    services.create(username);
     userBloomFilter.add(username);
     res.json({message: `${username} has been added`});
   } catch (err) {

@@ -17,13 +17,13 @@ class BloomFilter {
   }
 
   add(item) {
-    const hashes = [];
     for (let i = 0; i < this.hashCount; i++) {
       const hashValue = this.hashFunction(item, i);
       const index = hashValue % this.size;
       this.bitArray[index] = 1;
     }
   }
+
   contains(item) {
     for (let i = 0; i < this.hashCount; i++) {
       const hashValue = this.hashFunction(item, i);
