@@ -1,7 +1,15 @@
 const crypto = require('crypto');
 
-function generateHash(data) {
+const generateHash = (data) => {
   return crypto.createHash('sha256').update(data).digest().toString('hex');
-}
+};
 
-module.exports = generateHash;
+const getRandomInt = (size) => {
+  const value = crypto.randomBytes(16);
+  return value.toString('hex');
+};
+
+module.exports = {
+  generateHash,
+  getRandomInt,
+};

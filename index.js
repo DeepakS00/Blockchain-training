@@ -2,20 +2,22 @@ require('dotenv').config();
 
 const express = require('express');
 const cors = require('cors');
-const db = require('./src/utils/database');
+// const db = require('./src/utils/database');
 const user = require('./src/routes/user');
+const nonce = require('./src/routes/nonce');
 
-const app = express();
 const port = process.env.PORT || 1998;
+const app = express();
 
-db.sync({
-  alter: true,
-})
-  .then(() => console.log('DB created'))
-  .catch((err) => console.log('Error: ', err));
+// db.sync({
+//   alter: true,
+// })
+//   .then(() => console.log('DB created'))
+//   .catch((err) => console.log('Error: ', err));
 
 app.use(express.json());
 app.use('/user', user);
+app.use('/nonce', nonce);
 app.use(
   cors({
     origin: '*',
