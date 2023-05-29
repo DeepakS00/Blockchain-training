@@ -7,7 +7,9 @@ const setNonce = async (req, res) => {
     const {txn} = req.body;
     if (!txn) throw new Error('Transaction not found');
     const address = nonceService.selectAddress();
-    txn['to'] = address;
+    if (!txn['to']) {
+      txn['to'] = address;
+    }
     const nonce = await nonceService.setNonce(txn['to']);
     txn['nonce'] = nonce;
     res.json({message: 'Transaction is completed', transaction: txn});
